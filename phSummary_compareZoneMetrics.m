@@ -11,9 +11,9 @@ for fc=1:length(allFields)
 												% number!
 		disp(fns)
 
-		ss=zeros(maxZones,2);
+		ss=zeros(maxZones,3);
 		for cc=1:maxZones
-			ss(cc,:)=[mean(apResults.(['Z' num2str(cc)]).(fns)) std(apResults.(['Z' num2str(cc)]).(fns))];
+			ss(cc,:)=[length(apResults.(['Z' num2str(cc)]).(fns)) mean(apResults.(['Z' num2str(cc)]).(fns)) std(apResults.(['Z' num2str(cc)]).(fns))];
 			disp(ss(cc,:))
 		end
 		disp('')

@@ -1,4 +1,4 @@
-function [rPeak, rEnd, tau ] = csCurrentClampPulseAnalysis(dData, acqRate, pulseSize)
+function [rPeak, rEnd, tau ] = phUtil_CurrentClampPulseAnalysis(dData, acqRate, pulseSize)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -15,7 +15,7 @@ function [rPeak, rEnd, tau ] = csCurrentClampPulseAnalysis(dData, acqRate, pulse
 		[vPeak, iPeak]=max(dData);
 	end
 	
-	vEnd=mean(dData(end-round(nPnts/5):end));
+	vEnd=mean(dData((end-round(nPnts/5)):end));
 	
 	try
 		rPeak=1000*vPeak/pulseSize;

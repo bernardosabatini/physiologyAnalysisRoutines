@@ -10,6 +10,7 @@ useExact=1;
 % the list of pulse amplitudes to keep and analyze.  It doesn't matter if
 % there are entries here that are not used
 bExact=[-100 -50 0 20 40 50 60 80 100 150 200 250];
+bExact=-100:50:900;
 
 % instead define bins by low and high
 bLow= [-100 -60 0  1 40  80 100 101 130 180 ];
@@ -175,38 +176,40 @@ if useAllAmplitudes % resort the data
 	stdN=stdN(:, ia);		
 end
 
+rr=1:23;
+
 figure;
-for c=1:maxZones
+for c=1:2
 	vv=avgV(c,:);
 	ii=avgI(c,:);
 	vv(isnan(vv))=[];
 	ii(isnan(ii))=[];
-	plot(ii, vv)
+	plot(ii(rr), vv(rr), 'k')
 	hold on
 	vvs=semV(c,:);
 	iis=semI(c,:);
 	vvs(isnan(vvs))=[];
 	iis(isnan(iis))=[];
-	hh=errorbar(ii, vv, vvs, vvs);
-	set(hh, 'LineWidth', c)
+	hh=errorbar(ii(rr), vv(rr), vvs(rr), vvs(rr));
+	set(hh, 'LineWidth', c, 'color', 'k')
 	title(['I V']);
 end
 
 figure;
-for c=1:maxZones
+for c=1:1
 	aa=avgA(c,:);
 	ii=avgI(c,:);
 	aa(isnan(aa))=[];
 	ii(isnan(ii))=[];
 	
-	plot(ii, aa)
+	plot(ii(rr), aa(rr), 'color', 'k')
 	hold on
 	aas=semA(c,:);
 	iis=semI(c,:);
 	aas(isnan(aas))=[];
 	iis(isnan(iis))=[];
-	hh=errorbar(ii, aa, aas, aas);
-	set(hh, 'LineWidth', c)
+	hh=errorbar(ii(rr), aa(rr), aas(rr), aas(rr));
+	set(hh, 'LineWidth', c, 'color', 'k')
 	title(['I F']);	
 end
 
