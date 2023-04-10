@@ -1,0 +1,35 @@
+function phAnalyzePSC(dataWave, stimAOchannel, options)
+arguments
+    vhold=-70
+    vrev=0 
+    analysisDelay=5;
+    analysisWindow=20;
+end
+
+hString=dataWave.UserData.headerString;
+deltaT=dataWave.xscale(2);
+
+stimPattern=phUtil_HeaderValue(hs, ['state.phys.internal.pulseString_ao'] num2str(stimAOchannel) ]);
+
+
+stimNumber=phUtil_parsePulsePatternString(optoPulse, 'numPulses');
+stimDelay=phUtil_parsePulsePatternString(optoPulse, 'delay');
+stimISI=phUtil_parsePulsePatternString(optoPulse, 'isi');
+
+for pulseCounter=1:stimNumber
+
+    startAna=stimDelay+(stimNumber-1)*stimISI+options.analysisDelay;
+    endAna=startAna+options.analysisWindow;
+    startAnaPt=1+startAna/deltaT;
+    endAnaPt=1+endAna/deltaT;
+
+    maxPSC=max(dataWave.data(startAnaPt:endAnaPt));
+end
+
+
+
+
+
+
+
+
